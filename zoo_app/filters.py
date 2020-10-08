@@ -6,7 +6,7 @@ from django.db.models import Count
 from .models import ZooPlace, Animal
 
 
-def get_places_with_animal_count(queryset, name, value):
+def get_places_with_two_animals(queryset, name, value):
     return queryset.annotate(animals_count=Count('animals')).filter(animals_count__gte=2)
 
 
@@ -16,7 +16,8 @@ def get_animals_with_experienced_employee(queryset, name, value):
 
 
 class ZooPlaceFilter(django_filters.FilterSet):
-    animal_count = django_filters.BooleanFilter(method=get_places_with_animal_count, label='Учитывать кол-во животных?')
+    animal_count = django_filters.BooleanFilter(method=get_places_with_two_animals,
+                                                label='Учитывать кол-во животных?')
 
     class Meta:
         model = ZooPlace
