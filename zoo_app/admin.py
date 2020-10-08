@@ -16,11 +16,13 @@ class ZooPlaceAdmin(admin.ModelAdmin):
 class AnimalTypeAdmin(admin.ModelAdmin):
     list_display = ('name', )
     list_filter = ('name', )
+    search_fields = ('name', )
 
 
 class AnimalAdmin(admin.ModelAdmin):
     list_display = ('name', 'type', 'place', 'responsible_employee', )
     list_filter = ('name', 'type', 'place', 'responsible_employee', )
+    search_fields = ('name', 'type', 'place', 'responsible_employee', )
 
 
 admin.site.register(Employee, EmployeeAdmin)
