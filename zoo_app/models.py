@@ -46,7 +46,7 @@ class Animal(models.Model):
     place = models.ForeignKey(ZooPlace, verbose_name='Место', on_delete=models.CASCADE, related_name='animals')
     responsible_employee = models.ForeignKey(Employee, verbose_name='Ответсвтенный', on_delete=models.CASCADE,
                                              related_name='animals')
-    appointment_employee = models.DateField(verbose_name='Дата назначения сотрудника', blank=True, null=True)
+    appointment_employee_at = models.DateField(verbose_name='Дата назначения сотрудника', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='Дата добавлениия')
     updated_at = models.DateTimeField(auto_now=True, db_index=True, verbose_name='Дата обновления')
 
