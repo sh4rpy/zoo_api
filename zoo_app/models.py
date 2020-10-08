@@ -13,6 +13,10 @@ class Employee(models.Model):
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
 
+    @property
+    def get_employee_full_name(self):
+        return self.__str__()
+
 
 class ZooPlace(models.Model):
     """Место в зоопарке"""
@@ -38,10 +42,11 @@ class AnimalType(models.Model):
 class Animal(models.Model):
     """Животное"""
     name = models.CharField(max_length=50, verbose_name='Название')
-    type = models.ForeignKey(AnimalType, verbose_name='Вид', on_delete=models.CASCADE, related_name='animal_type')
-    place = models.ForeignKey(ZooPlace, verbose_name='Место', on_delete=models.CASCADE, related_name='animal_place')
+    type = models.ForeignKey(AnimalType, verbose_name='Вид', on_delete=models.CASCADE, related_name='animals')
+    place = models.ForeignKey(ZooPlace, verbose_name='Место', on_delete=models.CASCADE, related_name='animals')
     responsible_employee = models.ForeignKey(Employee, verbose_name='Ответсвтенный', on_delete=models.CASCADE,
-                                             related_name='animal_employee')
+                                             related_name='animals')
+    appointment_employee = models.DateField(verbose_name='Дата назначения сотрудника', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='Дата добавлениия')
     updated_at = models.DateTimeField(auto_now=True, db_index=True, verbose_name='Дата обновления')
 

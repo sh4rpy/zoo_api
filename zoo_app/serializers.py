@@ -10,6 +10,8 @@ class EmployeeSerializer(serializers.ModelSerializer):
 
 
 class ZooPlaceSerializer(serializers.ModelSerializer):
+    animal_count = serializers.ReadOnlyField(source='animals.count')
+
     class Meta:
         model = ZooPlace
         fields = '__all__'
@@ -22,9 +24,10 @@ class AnimalTypeSerializer(serializers.ModelSerializer):
 
 
 class AnimalSerializer(serializers.ModelSerializer):
-    type = serializers.CharField(source='type.name')
-    place = serializers.CharField(source='place.name')
-    responsible_employee = serializers.CharField(source='responsible_employee.__str__')
+    type = serializers.SlugRelatedField(slug_field='name', queryset=AnimalType.objects.all())
+    place = serializers.SlugRelatedField(slug_field='name', queryset=ZooPlace.objects.all())
+    responsible_employee = serializers.SlugRelatedField(slug_field='get_employee_full_name',
+                                                        queryset=Employee.objects.all())
 
     class Meta:
         model = Animal

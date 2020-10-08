@@ -2,6 +2,7 @@ from rest_framework import viewsets
 
 from .models import Employee, ZooPlace, AnimalType, Animal
 from .serializers import EmployeeSerializer, ZooPlaceSerializer, AnimalTypeSerializer, AnimalSerializer
+from .filters import AnimalPlaceFilter
 
 
 class EmployeeViewSet(viewsets.ModelViewSet):
@@ -14,7 +15,8 @@ class EmployeeViewSet(viewsets.ModelViewSet):
 class ZooPlaceViewSet(viewsets.ModelViewSet):
     queryset = ZooPlace.objects.all()
     serializer_class = ZooPlaceSerializer
-    filterset_fields = ('name',)
+    filterset_class = AnimalPlaceFilter
+    filterset_fields = ('name', 'places', )
     ordering_fields = ('name', )
 
 
