@@ -6,6 +6,7 @@ from .filters import ZooPlaceFilter, AnimalFilter
 
 
 class EmployeeViewSet(viewsets.ModelViewSet):
+    """Представление сотрудников зоопарка"""
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
     filterset_fields = ('working_position', )
@@ -13,6 +14,7 @@ class EmployeeViewSet(viewsets.ModelViewSet):
 
 
 class ZooPlaceViewSet(viewsets.ModelViewSet):
+    """Представление места животного в зоопарке"""
     queryset = ZooPlace.objects.all()
     serializer_class = ZooPlaceSerializer
     filterset_class = ZooPlaceFilter
@@ -21,6 +23,7 @@ class ZooPlaceViewSet(viewsets.ModelViewSet):
 
 
 class AnimalTypeViewSet(viewsets.ModelViewSet):
+    """Представление вида животного"""
     queryset = AnimalType.objects.all()
     serializer_class = AnimalTypeSerializer
     filterset_fields = ('name', )
@@ -28,6 +31,7 @@ class AnimalTypeViewSet(viewsets.ModelViewSet):
 
 
 class AnimalViewSet(viewsets.ModelViewSet):
+    """Представление животного"""
     queryset = Animal.objects.all()
     serializer_class = AnimalSerializer
     filterset_class = AnimalFilter

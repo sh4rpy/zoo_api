@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from .models import Employee, ZooPlace, AnimalType, Animal
 
+
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
@@ -25,6 +26,7 @@ class AnimalTypeSerializer(serializers.ModelSerializer):
 class AnimalSerializer(serializers.ModelSerializer):
     type = serializers.SlugRelatedField(slug_field='name', queryset=AnimalType.objects.all())
     place = serializers.SlugRelatedField(slug_field='name', queryset=ZooPlace.objects.all())
+    # для удобства чтения добавлено поле с полным именем закрепленного сотрудника
     responsible_employee_full_name = serializers.ReadOnlyField(source='responsible_employee.get_employee_full_name')
 
     class Meta:

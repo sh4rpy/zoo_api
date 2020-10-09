@@ -7,7 +7,7 @@ class EmployeeAdmin(admin.ModelAdmin):
     def get_pinned_animals(self, obj):
         return obj.animals.count()
 
-    get_pinned_animals.short_description = 'Количество закрепленных жиивотных'
+    get_pinned_animals.short_description = 'Количество закрепленных животных'
     list_display = ('first_name', 'last_name', 'age', 'working_position', 'get_pinned_animals')
     search_fields = ('first_name', 'last_name', 'working_position', )
 
